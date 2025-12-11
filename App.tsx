@@ -13,9 +13,11 @@ import {
   Eye,
   Menu,
   Languages,
-  Activity
+  Activity,
+  Smartphone
 } from 'lucide-react';
 import { toPng } from 'html-to-image';
+import { Capacitor } from '@capacitor/core'; // Import Capacitor
 import { Note, ViewMode, EditorTab, AppModule, Language } from './types';
 import { getNotes, saveNote, deleteNote, createNote } from './services/storageService';
 import { MarkdownViewer } from './components/MarkdownViewer';
@@ -33,6 +35,9 @@ const Header = ({ children, className = '' }: { children?: React.ReactNode; clas
 );
 
 const App: React.FC = () => {
+  // Check if running in Native App (APK)
+  const isNative = Capacitor.isNativePlatform();
+
   // Language State
   const [language, setLanguage] = useState<Language>('zh-CN');
   const t = getTranslation(language);
@@ -300,6 +305,8 @@ const App: React.FC = () => {
               <PenLine size={18} />
             </div>
             {t.notes.appTitle}
+            {/* Native Badge */}
+            {isNative && <span className="text-[10px] bg-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded ml-1">APP</span>}
           </div>
           
           <div className="flex items-center gap-2">

@@ -1,20 +1,41 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# MarkEase AI
 
-# Run and deploy your AI Studio app
+## 🆘 遇到 "代码推送失败" 怎么办？
 
-This contains everything you need to run your app locally.
+如果你在终端看到错误，请尝试以下步骤强制同步代码：
 
-View your app in AI Studio: https://ai.studio/apps/drive/10HEUUPrev6Wtx6Ld1_fVkUUzlAD5Qz5w
+```bash
+# 1. 确保所有文件都被添加
+git add .
 
-## Run Locally
+# 2. 提交更改
+git commit -m "Fix build configuration"
 
-**Prerequisites:**  Node.js
+# 3. 尝试推送到 main 分支
+git push origin main
+```
 
+如果提示 **"non-fast-forward"** 或 **"rejected"**（因为云端有你没有的更新），请执行：
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```bash
+# 强制覆盖云端（慎用，这会以你本地代码为准）
+git push -f origin main
+```
+
+---
+
+## 🚀 如何获取 APK (安卓安装包)
+
+代码推送到 GitHub 后，不需要自己打包，云端会自动处理：
+
+1. 打开你的 GitHub 仓库页面。
+2. 点击顶部的 **Actions** 标签。
+3. 点击最新的 **Build Android APK** 任务。
+4. 等待变成绿色 ✅ (约3-5分钟)。
+5. 滚动到页面最底部的 **Artifacts** 区域。
+6. 点击 **markease-debug.apk** 下载并安装。
+
+## 🔑 必须配置 API Key
+
+为了让 AI 功能正常使用，必须在 GitHub 设置里配置 Key：
+Settings -> Secrets and variables -> Actions -> New repository secret -> Name: `API_KEY`
